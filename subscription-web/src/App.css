@@ -1,0 +1,134 @@
+/* General body styling for margin and font */
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #f4f4f4; /* Light background for the app */
+}
+p {
+  font-family: Arial;
+  color: #685f5f; /* Light grey color */
+  
+}
+
+
+p[type=content], select {
+  color: #6e626e;
+  font-family: Impact;
+  font-weight: light;
+}
+
+/* Container styling for wrapping content */
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+}
+
+
+/* Universal button styling */
+.button {
+  background-color: #ADD8E6; /* Light blue background */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase; /* Making text uppercase for better readability */
+  outline: none;
+  display: inline-block; /* Ensures buttons align correctly if multiple */
+  margin: 5px;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.button:hover {
+  background-color: #6ca0d8; /* Darker shade of blue for button hover state */
+}
+
+
+
+/* Input field styling */
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=number], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button {
+  width: 10%;
+  background-color: #42a7c0;
+  color: white;
+  padding: 14px 0px;
+  margin: 8px 2;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #347f92;
+}
+/* Header and titles styling */
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+button[type=submit]:hover {
+  background-color: #45a049;
+}
+/* Header and titles styling */
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+/* Styling for navigation links */
+nav {
+  background-color: #ADD8E6;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center; /* Center-aligns the navigation links */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline; /* Display links in a line */
+  margin-right: 10px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
