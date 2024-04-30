@@ -2,7 +2,6 @@
 pragma solidity ^0.8.20;
 import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
 
-
 contract Payment {
   uint public nextPlanId;
   uint private timeOffset = 0;
@@ -84,8 +83,6 @@ contract Payment {
     emit SubscriptionCreated(msg.sender, planId, block.timestamp);
   }
 
-
-
   function getSubscription(address _subscriber, uint _planId) public view returns (address, uint, uint) {
         Subscription memory sub = subscriptions[_subscriber][_planId];
         return (sub.subscriber, sub.start, sub.nextPayment);
@@ -121,10 +118,7 @@ contract Payment {
       planId, 
       block.timestamp
     );
-    subscription.nextPayment = subscription.nextPayment + plan.frequency;
+    subscription.nextPayment = block.timestamp + plan.frequency;
   }
 
-  function skipTime(uint _days) public {
-        timeOffset += _days * 1 days;
-    }
 }

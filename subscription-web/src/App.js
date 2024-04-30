@@ -28,6 +28,8 @@ function App() {
     return (
         <BrowserRouter>
             <div>
+                <h1>Welcome to the Subscription System</h1>
+                <p>Select an option below to get started:</p>
                 <nav>
                     <ul>
                         <li><Link to="/create-plan" className="button">Create Plan</Link></li>
