@@ -6,8 +6,7 @@ function SubscribePlan() {
     const [subscriptions, setSubscriptions] = useState([]);
     const [plans, setPlans] = useState([]);
     const [isMetaMaskConnected, setIsMetaMaskConnected] = useState(false);
-    
-    
+
     useEffect(() => {
         async function loadPlans() {
             if (window.ethereum) {
@@ -20,18 +19,15 @@ function SubscribePlan() {
                         const signer = await provider.getSigner();
                         const address = await signer.getAddress();
                         const planCount = await contract.getPlanCount();
-                        const currentTime = Math.floor(Date.now() / 1000);
-
-                    
+                        const currentTime = Math.floor(Date.now() / 1000);   
                         const allPlans = [];
                         for (let i = 0; i < planCount; i++) {
                             const subscriptionData= await contract.getSubscription(address , i);
                             const plan = await contract.plans(i);
                             let content;  
                             if (subscriptionData[0] === address) {
-
                                 if (currentTime < subscriptionData[2]) {
-                                    content = plan.content;  // User is subscribed and within the active period
+                                    content = plan.content;  
                                 } else {
                                     content = "Your subscription has expired. Please renew to access the content!!!!";  // Subscription has expired
                                 }
@@ -57,7 +53,6 @@ function SubscribePlan() {
                 alert("Ethereum wallet is not connected");
             }
         }
-
         loadPlans();
     }, []);
     async function approve(amount){
@@ -74,9 +69,8 @@ function SubscribePlan() {
             console.error('Subscription error:', error);    
             alert("You rejected the approvement");
         }
-        
-
     };
+
     async function subscribe(planId) {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
@@ -90,10 +84,10 @@ function SubscribePlan() {
             setSubscriptions(data =>[...data , [planId, address]]);
             
         } catch (error) {
-            if (error.code === 4001) {
-                alert("You rejected transaction. Please try again.");
-            }else {
+            if (error.code === "CALL_EXCEPTION") {
                 alert("You need to approve sufficient amount of ST before making transactions.");
+            }else {
+                alert("You rejected transaction. Please try again.");
             }      
         }
     };
@@ -118,11 +112,11 @@ function SubscribePlan() {
                 )
             ); 
         } catch (error) {
-            if (error.code === 4001) {
-                alert("You rejected transaction. Please try again.");
-            }else {
+            if (error.code === "CALL_EXCEPTION") {
                 alert("You need to approve sufficient amount of ST before making transactions.");
-            }      
+            }else {
+                alert("You rejected transaction. Please try again.");
+            }     
         }
     };
     async function cancel(planId) {
@@ -139,19 +133,13 @@ function SubscribePlan() {
             subscriptions(data => data.filter(pair => !(pair[0] === planId && pair[1] === address)));
             
         } catch (error) {
-       
-
-            if (error.code === "ACTION_REJECTED") {
-                // User rejected the transaction
+            if (error.code === "ACTION_REJECTED") {  
                 alert("You have rejected the transaction. Please try again if you wish to cancel.");
-            } else if (error.code === "CALL_EXCEPTION") {
-                // Check if the error message is provided by ethers.js
+            } else if (error.code === "CALL_EXCEPTION") {          
                 alert("You cannot cancel non existing plan.");
-            } else if (error.message) {
-                // Fallback to the error message provided by ethers.js
+            } else if (error.message) {  
                 alert("Transaction is failed: " + error.code);
             } else {
-                // General fallback error message
                 alert("Transaction failed due to contract requirements not being met.");
             }     
         }
@@ -163,7 +151,7 @@ function SubscribePlan() {
             <p>Welcome to our subscription plans page! Below you will find the available plans. Choose a plan that suits you best and follow the steps to subscribe, renew, or cancel your subscription.</p>
             {plans.map((plan, index) => (
             <div key={index}>
-                <p>Plan {plan.id + 1}: Subscribe with {plan.amount} ST to get this content every 
+                <p>Plan {plan.id + 1}: Subscribe with {plan.amount} ST to get this content every  
                     {parseInt(plan.frequency) < 1 ? ' >1 day' : `${plan.frequency} days`}
                 </p>
                 {plan.isSubscribed ? (
